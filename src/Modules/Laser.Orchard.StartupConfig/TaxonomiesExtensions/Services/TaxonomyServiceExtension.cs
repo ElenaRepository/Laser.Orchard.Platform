@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Laser.Orchard.StartupConfig.Models;
 using Orchard;
+using Orchard.Caching;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.MetaData;
 using Orchard.Core.Common.Models;
@@ -21,7 +22,30 @@ namespace Laser.Orchard.StartupConfig.TaxonomiesExtensions.Services {
         private readonly TaxonomyService _taxonomyService;
 
         
-        public TaxonomyServiceExtension(IRepository<TermContentItem> termContentItemRepository, IContentManager contentManager, INotifier notifier, IContentDefinitionManager contentDefinitionManager, IAuthorizationService authorizationService, IOrchardServices services, IProcessingEngine processingEngine, ShellSettings shellSettings, IShellDescriptorManager shellDescriptorManager, TaxonomyService taxonomyService) : base(termContentItemRepository, contentManager, notifier, contentDefinitionManager, authorizationService, services, processingEngine, shellSettings, shellDescriptorManager) {
+        public TaxonomyServiceExtension(
+            IRepository<TermContentItem> termContentItemRepository, 
+            IContentManager contentManager, 
+            INotifier notifier, 
+            IContentDefinitionManager contentDefinitionManager, 
+            IAuthorizationService authorizationService, 
+            IOrchardServices services, 
+            IProcessingEngine processingEngine, 
+            ShellSettings shellSettings, 
+            IShellDescriptorManager shellDescriptorManager, 
+            TaxonomyService taxonomyService,
+            ICacheManager cacheManager,
+            ISignals signals) 
+            : base(termContentItemRepository, 
+                contentManager, 
+                notifier, 
+                contentDefinitionManager, 
+                authorizationService, 
+                services, 
+                processingEngine, 
+                shellSettings, 
+                shellDescriptorManager,
+                cacheManager,
+                signals) {
             _taxonomyService = taxonomyService;
         }
 
